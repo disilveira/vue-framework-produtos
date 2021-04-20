@@ -1,28 +1,50 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Nav titulo="Cadastro de Produtos - Vue" />
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5">
+          <ProductForm :onAddProduto="handleOnAddProduct" />
+        </div>
+        <div class="col-md-7">
+          <ProductList :produtos="produtos" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Nav from "./components/Nav";
+import ProductForm from "./components/ProductForm";
+import ProductList from "./components/ProductList";
 
 export default {
-  name: 'App',
+  data() {
+    return {
+      produtos: [
+        {
+          nome: "Iphone 12",
+          preco: "4.500,00",
+          categoria: "Celular",
+        },
+        {
+          nome: "Playstation 5",
+          preco: "7.500,00",
+          categoria: "Console",
+        },
+      ],
+    };
+  },
   components: {
-    HelloWorld
-  }
-}
+    Nav,
+    ProductForm,
+    ProductList,
+  },
+  methods: {
+    handleOnAddProduct(produto) {
+      this.produtos = this.produtos.concat(produto);
+    },
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
